@@ -20,7 +20,7 @@ public class GraphGenerator {
 	/*
 	 * Number of edges in a graph.
 	 */
-	private static final int edgesNumber = 100;
+	private static final int edgesNumber = 20;
 	
 	/*
 	 * How many vertices are created based on number of edges, bottom limit and upper limit 
