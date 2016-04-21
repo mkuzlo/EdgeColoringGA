@@ -20,14 +20,14 @@ public class GraphGenerator {
 	/*
 	 * Number of edges in a graph.
 	 */
-	private static final int edgesNumber = 20;
+	private static final int edgesNumber = 6;
 	
 	/*
 	 * How many vertices are created based on number of edges, bottom limit and upper limit 
 	 * For example for verticesBottomLimit = 0.3 and verticesUpperLimit = 0.6 and edgesNumber = 100,
 	 * the number of vertices will be between 30 and 60;
 	 */
-	private static final double verticesBottomLimit = 0.3; 
+	private static final double verticesBottomLimit = 0.5; 
 	private static final double verticesUpperLimit = 0.5;  
 
 	

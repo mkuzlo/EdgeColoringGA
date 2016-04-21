@@ -15,6 +15,7 @@ public class Graph {
 	private int verticesNumber;
 	private int graphRepresentation[][];
 	private String possibleColors[];
+	private static Graph instance;
 	
 	public Graph(File file){
 		try {
@@ -33,11 +34,16 @@ public class Graph {
 			scan.close();
 			generatePossibleColors();
 			computeNumberOfVertices();
+			instance = this;
 			
 		} catch (FileNotFoundException e) {
 			System.out.println("Graph not found at: " + file.toString());
 			e.printStackTrace();
 		}
+	}
+	
+	public static Graph getInstace(){
+		return instance;
 	}
 	
 	private void generatePossibleColors(){
