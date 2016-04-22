@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 /**
- * Klasa reprezentująca graf, jak konstruktor podajemy scieżke pliku z danymi grafu
- * @author Quzi
+ * Class representation of graph loaded from file.
+ * @author Mateusz Kuzło
  *
  */
 public class Graph {
@@ -17,6 +17,10 @@ public class Graph {
 	private String possibleColors[];
 	private static Graph instance;
 	
+	/**
+	 * Creates object representation of a graph from a given file.
+	 * @param file
+	 */
 	public Graph(File file){
 		try {
 			Scanner scan = new Scanner(file);
@@ -42,10 +46,18 @@ public class Graph {
 		}
 	}
 	
+	/**
+	 * Returns instance of this class.
+	 * @return Graph
+	 */
 	public static Graph getInstace(){
 		return instance;
 	}
 	
+	/**
+	 * Fills array with integers representing possible colors that can
+	 * be used in genetic algorithm.
+	 */
 	private void generatePossibleColors(){
 		possibleColors = new String[edgesNumber];
 		for(int i=1;i<=edgesNumber;i++){
@@ -53,6 +65,9 @@ public class Graph {
 		}
 	}
 	
+	/**
+	 * Computes number of vertices used to build this graph.
+	 */
 	private void computeNumberOfVertices(){
 		List<String> list = new ArrayList<String>();		
 		for (int i = 0; i < edgesNumber; i++)
@@ -67,18 +82,37 @@ public class Graph {
 		verticesNumber = list.size();
 	}
 	
+	/**
+	 * Returns number of vertices is this graph.
+	 * @return int
+	 */
 	public int getVerticesNumber() {
 		return verticesNumber;
 	}
 
+	/**
+	 * Returns number of edges in this graph.
+	 * @return
+	 */
 	public int getEdgesNumber() {
 		return edgesNumber;
 	}
-
+	
+	/**
+	 * Returns two dimensional array representing this graph
+	 * [0][n] - edge
+	 * [1][n] - source vertex
+	 * [2][n] - destination vertex
+	 * @return int[3][numberOfEdges]
+	 */
 	public int[][] getGraphRepresentation() {
 		return graphRepresentation;
 	}
 
+	/**
+	 * Returns array of possible colors that can be used in genetic algorithm.
+	 * @return
+	 */
 	public String[] getPossibleColors() {
 		return possibleColors;
 	}

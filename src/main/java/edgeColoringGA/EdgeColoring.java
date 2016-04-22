@@ -1,8 +1,6 @@
 package edgeColoringGA;
 
 
-
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -11,39 +9,39 @@ import edgeColoringGA.GALib.Crossover;
 import edgeColoringGA.GALib.GAException;
 import edgeColoringGA.GALib.GAStringsSeq;
 import edgeColoringGA.utils.Graph;
+import edgeColoringGA.utils.Parameters;
 
 public class EdgeColoring extends GAStringsSeq {
-	public EdgeColoring(Graph graph) throws GAException
-    {
-		
+	public EdgeColoring(Graph graph, Parameters param) throws GAException{
 		super(  graph.getEdgesNumber(), //size of chromosome
-                600, //population has N chromosomes
-                0.7, //crossover probability
-                5, //random selection chance % (regardless of fitness)
-                10000, //max generations
+                param.getPopulation(), //population has N chromosomes
+                param.getCrossoverProbability(), //crossover probability
+                param.getRandomSelectionChance(), //random selection chance % (regardless of fitness)
+                param.getMaxGenerations(), //max generations
                 0, //num prelim runs (to build good breeding stock for final/full run)
-                20, //max generations per prelim run
-                0.3, //chromosome mutation prob.
+                0, //max generations per prelim run
+                param.getMutationProbablity(), //chromosome mutation prob.
                 0, //number of decimal places in chrom
                 graph.getPossibleColors(), //gene space (possible gene values)
                 Crossover.ctTwoPoint, //crossover type
-                true); //compute statisitics?
-		
+                false); //compute statisitics?		
     }
 	
 
 	@Override
 	protected double getFitness(int iChromIndex) {
 		ChromStrings chromosome = (ChromStrings)this.getChromosome(iChromIndex);
-	    double fitness = 0;
 	    int usedColors = numberOfColorUsed(chromosome);	    
 	    int repetitions = numberOfAdjacentSameColoredEdges(chromosome);
-	    if(repetitions>0) fitness = 1.0/repetitions;
-	    else fitness = 1 + (1.0/usedColors);
-		return fitness;
+	    if(repetitions>0) return  1.0/repetitions;
+	    else return  1 + (1.0/usedColors);
 	}
 	
-	//zwraca ile kolorow uzyto do pokolorowania grafu w danej generacji
+	/**
+	 * Returns number of colors used to color graph.
+	 * @param chromosome
+	 * @return
+	 */
 	public int numberOfColorUsed(ChromStrings chromosome){	
 		List<String> list = new ArrayList<String>();		
 		for (int i = 0; i < chromosomeDim; i++)
@@ -55,18 +53,22 @@ public class EdgeColoring extends GAStringsSeq {
 		return list.size();
 	}
 	
-	//zwraca ile krawedzi przyleglych do wierzcholkow ma ten sam kolor
+	/**
+	 * Returns number of times when same colored edges were assigned to vertex in whole chromosome
+	 * @param chromosome
+	 * @return 
+	 */
 	public int numberOfAdjacentSameColoredEdges(ChromStrings chromosome){
 		int count = 0;
 		Graph graph = Graph.getInstace();
 		int[][] graphRepresentation = graph.getGraphRepresentation();
 		int edges = chromosomeDim;
 		int vertices = graph.getVerticesNumber();
-		int colors = numberOfColorUsed(chromosome);
 		
 		for(int i = 0;i<edges;i++){
 			graphRepresentation[0][i] = Integer.parseInt(chromosome.getGene(i).trim());
 		}
+		
 		for(int v = 1;v<=vertices;v++){
 			int n = 0;
 			int[] temp = new int[edges];
@@ -81,6 +83,12 @@ public class EdgeColoring extends GAStringsSeq {
 		return count;
 	}
 	
+	/**
+	 * Returns number of time each color in array has repeated itself.
+	 * @param array of colors adjacent to given vertex
+	 * @param number of colors in array
+	 * @return number of repetitions
+	 */
 	private int numberOfRepetitions(int tab[], int n){
 		int rep = 0;
 		int[] tab2 = new int[n];

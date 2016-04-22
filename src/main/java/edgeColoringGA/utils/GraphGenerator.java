@@ -60,7 +60,7 @@ public class GraphGenerator {
 	}
 	
 	/**
-	 * Fills array with edges and vertices.	 * 
+	 * Fills array with edges and vertices.	 
 	 * @param array [3][edgesNumber]
 	 */
 	private static void generateEdges(int array[][]){
