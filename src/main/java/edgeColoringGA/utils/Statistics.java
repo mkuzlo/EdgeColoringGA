@@ -38,4 +38,6 @@ public class Statistics {
 		System.out.println("Fitness: " + edgeColoring.getFittestChromosomesFitness());		
 		System.out.println("Czas trwania obliczeń: " + duration + " s");
 	}
+	
+	
 }

@@ -28,8 +28,8 @@ public class Parameters {
 	public int getRandomSelectionChance() {
 		return randomSelectionChance;
 	}
-	public void setRandomSelectionChance(int randomSelectionChance) {
-		this.randomSelectionChance = randomSelectionChance;
+	public void setRandomSelectionChance(double randomSelectionChance) {
+		this.randomSelectionChance = (int)(randomSelectionChance*100);
 	}
 	public int getMaxGenerations() {
 		return maxGenerations;
