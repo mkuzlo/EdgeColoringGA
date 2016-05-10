@@ -82,6 +82,8 @@ public class Graph {
 		verticesNumber = list.size();
 	}
 	
+	
+	
 	/**
 	 * Returns number of vertices is this graph.
 	 * @return int
@@ -115,6 +117,24 @@ public class Graph {
 	 */
 	public String[] getPossibleColors() {
 		return possibleColors;
+	}
+	
+	/**
+	 * Returns degree of this graph
+	 * @return
+	 */
+	public int getGraphDegree(){
+		int highestValue = 0;
+		int temp;
+		for(int v=1;v<=verticesNumber;v++){
+			temp = 0;
+			for(int i=0;i<edgesNumber;i++){
+				if(graphRepresentation[1][i] == v) temp++;
+				if(graphRepresentation[2][i] == v) temp++;
+			}
+			if(temp>highestValue) highestValue = temp;			
+		}		
+		return highestValue;		
 	}
 
 }

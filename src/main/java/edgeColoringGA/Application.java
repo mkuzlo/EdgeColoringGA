@@ -1,16 +1,11 @@
 package edgeColoringGA;
 
 import java.io.File;
-
 import edgeColoringGA.GALib.GAException;
 import edgeColoringGA.utils.Graph;
 import edgeColoringGA.utils.Parameters;
+import edgeColoringGA.utils.Statistics;
 
-/**
- * Main class for running genetic algorithm.
- * @author Quzi
- *
- */
 public class Application {
 	public static void main (String[] args){
 		try {
@@ -19,15 +14,24 @@ public class Application {
 			
 			Parameters params = new Parameters();
 			params.setPopulation(500);
-			params.setMaxGenerations(1000);
-			params.setCrossoverProbability(0.7);			
-			params.setMutationProbablity(0.2);			
-			params.setRandomSelectionChance(10);
+			params.setMaxGenerations(2000);
+			params.setCrossoverProbability(0.6);			
+			params.setMutationProbablity(0.3);			
+			params.setRandomSelectionChance(5);
 			
+			long startTime = System.currentTimeMillis();
 			EdgeColoring edgeColoring = new EdgeColoring(graph, params);
 			Thread thread = new Thread(edgeColoring);
 			thread.start();
-			
+			try {
+				thread.join();
+				long endTime = System.currentTimeMillis();
+				long duration = (endTime-startTime)/1000;
+				Statistics stats = new Statistics(params, graph, edgeColoring,duration);
+				stats.printStats();
+			} catch (InterruptedException e) {				
+				e.printStackTrace();
+			}
 		} catch (GAException e) {
 			System.out.println(e.getMessage());
 		}
