@@ -35,6 +35,7 @@ public class Statistics {
 		ChromStrings chrom = (ChromStrings) edgeColoring.getFittestChromosome();		
 		System.out.println("Ilość błędów w kolorowaniu: " + edgeColoring.numberOfAdjacentSameColoredEdges(chrom));
 		System.out.println("Ilość użytych kolorów: " + edgeColoring.numberOfColorUsed(chrom));
+		System.out.println("Zakończono na generacji: " + edgeColoring.getFinalGeneration());
 		System.out.println("Fitness: " + edgeColoring.getFittestChromosomesFitness());		
 		System.out.println("Czas trwania obliczeń: " + duration + " s");
 	}

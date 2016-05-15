@@ -39,6 +39,8 @@ public abstract class GA implements Runnable
 
     /** maximum generations to evolve */
     int maxGenerations; 
+    
+    int finalGeneration;
 
     /** number of prelim generations to evolve. Set to zero to disable */
     int numPrelimRuns; 
@@ -165,6 +167,8 @@ public abstract class GA implements Runnable
     {
         return (this.genAvgDeviation[iGeneration]);
     }
+    
+    
 
     /**
      * Gets the average fitness of the given generation of chromosomes
@@ -385,7 +389,8 @@ public abstract class GA implements Runnable
 
             iGen++;
         }
-
+        //tutaj
+        finalGeneration = iGen;
         System.out.println("GEN " + (iGen + 1) + " AVG FITNESS = " + this.genAvgFitness[iGen-1] +
                            " AVG DEV = " + this.genAvgDeviation[iGen-1]);
 
@@ -734,5 +739,13 @@ public abstract class GA implements Runnable
             iResult += (digit << (iLen - i - 1));
         }
         return (iResult);
+    }
+    
+    public void terminate(){
+    	this.maxGenerations=0;
+    }
+    
+    public int getFinalGeneration(){
+    	return this.finalGeneration;
     }
 }

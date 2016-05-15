@@ -36,7 +36,7 @@ public class Graph {
 				}
 			}
 			scan.close();
-			generatePossibleColors();
+			//generatePossibleColors();
 			computeNumberOfVertices();
 			instance = this;
 			
@@ -58,9 +58,9 @@ public class Graph {
 	 * Fills array with integers representing possible colors that can
 	 * be used in genetic algorithm.
 	 */
-	private void generatePossibleColors(){
-		possibleColors = new String[edgesNumber];
-		for(int i=1;i<=edgesNumber;i++){
+	private void generatePossibleColors(int n){
+		possibleColors = new String[n];
+		for(int i=1;i<=n;i++){
 			possibleColors[i-1] = " " + i;
 		}
 	}
@@ -113,9 +113,11 @@ public class Graph {
 
 	/**
 	 * Returns array of possible colors that can be used in genetic algorithm.
+	 * n - number of colors
 	 * @return
 	 */
-	public String[] getPossibleColors() {
+	public String[] getPossibleColors(int n) {
+		generatePossibleColors(n);
 		return possibleColors;
 	}
 	

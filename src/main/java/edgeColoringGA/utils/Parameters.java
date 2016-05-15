@@ -10,9 +10,16 @@ public class Parameters {
 	private int randomSelectionChance;
 	private int maxGenerations;
 	private double mutationProbablity;
+	private int numberOfPossibleGeneValues;
 	
 	
 	
+	public int getNumberOfPossibleGeneValues() {
+		return numberOfPossibleGeneValues;
+	}
+	public void setNumberOfPossibleGeneValues(int numberOfPossibleGeneValues) {
+		this.numberOfPossibleGeneValues = numberOfPossibleGeneValues;
+	}
 	public int getPopulation() {
 		return population;
 	}

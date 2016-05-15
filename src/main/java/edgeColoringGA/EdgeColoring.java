@@ -22,19 +22,24 @@ public class EdgeColoring extends GAStringsSeq {
                 0, //max generations per prelim run
                 param.getMutationProbablity(), //chromosome mutation prob.
                 0, //number of decimal places in chrom
-                graph.getPossibleColors(), //gene space (possible gene values)
+                graph.getPossibleColors(param.getNumberOfPossibleGeneValues()), //gene space (possible gene values)
                 Crossover.ctTwoPoint, //crossover type
                 false); //compute statisitics?		
     }
+	
 	
 
 	@Override
 	protected double getFitness(int iChromIndex) {
 		ChromStrings chromosome = (ChromStrings)this.getChromosome(iChromIndex);
 	    int usedColors = numberOfColorUsed(chromosome);	    
-	    int repetitions = numberOfAdjacentSameColoredEdges(chromosome);
-	    if(repetitions>0) return  1.0/repetitions;
-	    else return  1 + (1.0/usedColors);
+	    int errors = numberOfAdjacentSameColoredEdges(chromosome);	    
+	    if(errors>0) return  1.0/errors;
+	    else {
+	    	//if(usedColors <= 7) terminate();  //terminates algorithm after reaching desired amount of colors
+	    	return  1 + (1.0/usedColors);
+	    }
+	    
 	}
 	
 	/**
